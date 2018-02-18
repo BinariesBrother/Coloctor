@@ -38,6 +38,10 @@ let io = socketIo.listen(server);
 
 let ifaces = os.networkInterfaces();
 
+app.get('/', function () {
+
+});
+
 server.listen(program.port, program.hostname, null, function () {
   let address = server.address();
   let path = address.address;
