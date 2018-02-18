@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.0.
 
+## Running coloctor server
+
+* `node src/coloctor.js`
+* `node src/coloctor.js -a` to include all logs.
+
+See coloctor.json to enable/disable log levels separately.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
