@@ -1,11 +1,9 @@
-let os = require('os');
-let express = require('express');
-let http = require('http');
-let socketIo = require('socket.io');
 let logger = require('node-yolog');
 let program = require('commander');
 
-let coloctorConfig = require('../coloctor.json');
+let app = require('core/app');
+
+let coloctorConfig = require('core/coloctor.json');
 
 /**
  * Enable/disable logger with commander options
@@ -32,37 +30,4 @@ for (let config in loggerConfig) {
 
 logger.info('Start Coloctor server');
 
-let app = express();
-let server = http.createServer(app);
-let io = socketIo.listen(server);
-
-let ifaces = os.networkInterfaces();
-
-app.get('/', function () {
-
-});
-
-server.listen(program.port, program.hostname, null, function () {
-  let address = server.address();
-  let path = address.address;
-  logger.info('Application runs: http://' + path + ':' + program.port);
-  logger.info('Check available ip to test with device on the same network:');
-  Object.keys(ifaces).forEach(function (ifname) {
-    let alias = 0;
-    ifaces[ifname].forEach(function (iface) {
-      if ('IPv4' !== iface.family || iface.internal !== false) {
-        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
-        return;
-      }
-      if (alias >= 1) {
-        // this single interface has multiple ipv4 addresses
-        logger.info('\t-', ifname + ':' + alias, iface.address);
-      }
-      else {
-        // this interface has only one ipv4 adress
-        logger.info('\t-', ifname, iface.address);
-      }
-      ++alias;
-    });
-  });
-});
+app.init();
