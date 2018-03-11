@@ -1,0 +1,28 @@
+.drawer-panel
+  .menu-button
+    position: fixed
+    top: 0.7em
+    &.menu-right
+      right: 0.75em
+    &.menu-left
+      left: 0.75em
+
+  .drawer-panel-backdrop
+    position: fixed
+    width: 100vw
+    height: 100vh
+    z-index: 10
+    background-color: rgba(0, 0, 0, 0.2)
+    top: 0
+    left: 0
+
+    .container
+      &.container-left
+        left: 0
+      &.container-right
+        right: 0
+      position: absolute
+      width: 75vw
+      max-width: 500px
+      height: 100vh
+      background-color: rgba(0, 0, 0, 0.65)

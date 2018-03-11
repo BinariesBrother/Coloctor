@@ -1,3 +1,37 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div class="global">
+
+  <div *ngFor="let header of headerList; last as last;">
+    <mat-toolbar *ngIf="!last">
+      <mat-toolbar-row>
+        <div class="center">{{header.headerTitle}}</div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-toolbar ng-sticky [offSet]="0" *ngIf="last" class="mat-elevation-z6">
+      <mat-toolbar-row>
+        <div class="center">
+          {{header.headerTitle}}
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row *ngIf="header.headerMenus && header.headerMenus.length">
+        <mat-tab-group class="demo-tab-group" style="width: 100%;">
+          <mat-tab #mapTab label="{{link.name}}" *ngFor="let link of header.headerMenus">
+            <router-init *ngIf="mapTab.isActive" [header]="link">
+              {{link.name}}
+            </router-init>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+  </div>
+  <drawer-panel [properties]="leftDrawerPanelProperties" [matIcon]="'menu'">
+    <panel-navigation></panel-navigation>
+  </drawer-panel>
+  <drawer-panel [properties]="rightDrawerPanelProperties" [matIcon]="'settings'">
+    <panel-settings></panel-settings>
+  </drawer-panel>
+  <router-outlet></router-outlet>
+</div>
 
 

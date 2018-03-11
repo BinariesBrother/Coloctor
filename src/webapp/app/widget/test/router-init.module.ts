@@ -1,16 +1,17 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {TestComponent} from './test.component';
+import {RouterInitComponent} from './router-init.component';
 
 @NgModule({
   declarations: [
-    TestComponent
+    RouterInitComponent
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  bootstrap: [TestComponent]
+  bootstrap: [RouterInitComponent],
+  exports: [RouterInitComponent]
 })
-export class TestModule {
+export class RouterInitModule {
 }

@@ -1,0 +1,20 @@
+<div class="drawer-panel">
+  <button mat-icon-button
+    color="primary"
+    class="menu-button"
+    [ngClass]="properties.class"
+    (click)="open()">
+    <mat-icon aria-label="Example icon-button with a heart icon">{{matIcon}}</mat-icon>
+  </button>
+  <div *ngIf="properties.isOpen"
+    class="drawer-panel-backdrop"
+
+    (click)="close()">
+    <div class="container"
+      (click)="empty($event)"
+      [ngClass]="{'container-left':properties.isLeft(properties.position), 'container-right':properties.isRight(properties.position)}">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
+

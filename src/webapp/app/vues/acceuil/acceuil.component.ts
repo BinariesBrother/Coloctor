@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {HeaderHelperService} from '../../helper/header-helper.service';
 
 @Component({
   selector: 'app-acceuil',
@@ -6,6 +7,16 @@ import {Component} from '@angular/core';
   styleUrls: ['./acceuil.component.sass']
 })
 export class AcceuilComponent {
-  title = 'acceuil';
+  private title = 'acceuil';
+  private headerHelperService: HeaderHelperService;
+
+  constructor (headerHelperService: HeaderHelperService) {
+    this.headerHelperService = headerHelperService;
+    this.headerHelperService.addHeaderContent({headerTitle: 'acceuil'});
+  }
+
+  ngOnDestroy () {
+    this.headerHelperService.removeTitleTail();
+  }
 }
 

@@ -1,17 +1,31 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AcceuilComponent} from './acceuil/acceuil.component';
 import {AcceuilModule} from './acceuil/acceuil.module';
+import {RouterModule, Routes} from '@angular/router';
+import {GroupeModule} from './groupes/groupe.module';
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: '/acceuil',
+    pathMatch: 'full'
+  }
+  // { path: '**', component: PageNotFoundComponent }
+];
 
 @NgModule({
-  declarations: [
-    AcceuilModule
-  ],
+  declarations: [],
   imports: [
-    BrowserModule
+    AcceuilModule,
+    GroupeModule,
+    RouterModule.forRoot(
+      appRoutes,
+      {enableTracing: true, useHash: true} // <-- debugging purposes only
+    )
   ],
   providers: [],
-  bootstrap: []
+  bootstrap: [],
+  exports: [RouterModule]
 })
 export class VueModule {
 }
+
