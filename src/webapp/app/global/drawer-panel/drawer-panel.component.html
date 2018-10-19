@@ -11,8 +11,14 @@
 
     (click)="close()">
     <div class="container"
+      *ngIf="properties.isOpen"
       (click)="empty($event)"
       [ngClass]="{'container-left':properties.isLeft(properties.position), 'container-right':properties.isRight(properties.position)}">
+      <div class="content-close">
+        <button mat-icon-button (click)="close()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
       <ng-content></ng-content>
     </div>
   </div>

@@ -7,7 +7,7 @@ import {VueModule} from '../vues/vue.module';
 import {WidgetModule} from '../widget/widget.module';
 import {
   MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatTabsModule,
-  MatMenuModule
+  MatMenuModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -15,6 +15,7 @@ import {NgStickyDirective} from 'ng-sticky';
 import {DrawerPanelComponent} from './drawer-panel/drawer-panel.component';
 import {PanelSettingsComponent} from './panel-settings/panel-settings.component';
 import {PanelNavigationComponent} from './panel-navigation/panel-navigation.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,12 @@ import {PanelNavigationComponent} from './panel-navigation/panel-navigation.comp
   imports: [
     BrowserModule,
     MatButtonModule,
+    MatInputModule,
     MatToolbarModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatMenuModule,
     NoopAnimationsModule,

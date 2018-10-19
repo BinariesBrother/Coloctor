@@ -1,34 +1,43 @@
 <div class="panel-navigation">
 
-  <button color="basic" mat-button>
+  <button color="basic" mat-icon-button routerLink="" routerLinkActive="active">
     <mat-icon>home</mat-icon>
   </button>
   <div class="menu-card">
-    <div class="menu-header">Groupes</div>
-    <div class="menu-header-action">+</div>
+    <div class="menu-header">Groupes
+      <button mat-icon-button
+        color="primary"
+        class="menu-header-action"
+        (click)="demandeNouveauGroupe()"
+        [disabled]="nouveauGroupe!==null">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
     <div class="menu-content">
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-        <button mat-menu-item>Item 2</button>
-      </mat-menu>
+      <div>
+        <form *ngIf="nouveauGroupe!==null" class="example-form" [formGroup]="nomFormControl">
+          {{nomFormControl.hasError('required')}}
+          {{nomFormControl.hasError('maxLength')}}
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nom du groupe"
+              [errorStateMatcher]="matcher">
+            <mat-error *ngIf="nomFormControl.hasError('maxLength') && !nomFormControl.hasError('required')">
+              Veuillez entrer moins de 5 caractères
+            </mat-error>
+            <mat-error *ngIf="nomFormControl.hasError('required')">
+              Le nom du groupe est <strong>obligatoire</strong>
+            </mat-error>
+          </mat-form-field>
+        </form>
+        <button *ngFor="let n of [0,1,2,3,4,5,6,7,8,9]"
+          mat-button
+          class="menu-content-list-element"
+          (click)="groupe(n)"
+          title="Item {{n}}"
+        >Item {{n}}
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
+</div>

@@ -1,4 +1,6 @@
 import {Component, Input} from '@angular/core';
+import {Event, NavigationStart, Router} from '@angular/router';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 export class DrawerPanelProperties {
   isOpen: boolean;
@@ -30,21 +32,47 @@ export enum PositionEnum {
 @Component({
   selector: 'drawer-panel',
   templateUrl: './drawer-panel.component.html',
-  styleUrls: ['./drawer-panel.component.sass']
+  styleUrls: ['./drawer-panel.component.sass'],
+  animations: [
+    trigger('drawer', [
+      state('inactive', style({
+        width: '0'
+      })),
+      state('active', style({
+        width: '100%'
+      })),
+      transition('inactive => active', animate('100ms ease-in')),
+      transition('active => inactive', animate('100ms ease-out'))
+    ])
+  ]
 })
 export class DrawerPanelComponent {
   @Input() properties: DrawerPanelProperties;
   @Input() matIcon: string;
 
-  close () {
+  constructor (private router: Router) {
+    this.routeChange(router);
+  }
+
+  close (): void {
     this.properties.isOpen = false;
   }
 
-  open () {
+  open (): void {
     this.properties.isOpen = true;
   }
 
-  empty (event) {
+  empty (event): void {
     event.stopPropagation();
+  }
+
+  private routeChange (router: Router) {
+    router.events.subscribe((event: Event) => {
+
+      if (event instanceof NavigationStart) {
+        this.close();
+      }
+
+    });
   }
 }
